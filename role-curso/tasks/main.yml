@@ -3,7 +3,7 @@
     name: "{{ packages }}"
   vars:
     packages:
-    - wget
+    - unzip
 
 - name: Copiar software tomcat
   copy:
