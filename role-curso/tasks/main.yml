@@ -35,15 +35,3 @@
     src: /tmp/curso.zip
     dest: /opt/tomcat/webapps
     remote_src: yes
-
-- name: Iniciando aplicacion
-  systemd:
-    state: stopped
-    name: tomcat
-    enabled: yes
-
-- name: Validando
-  systemd:
-    state: started
-    name: tomcat
-    enabled: yes
