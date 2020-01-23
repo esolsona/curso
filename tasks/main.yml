@@ -1,0 +1,49 @@
+- name: Instalando dependencias de sistema
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - wget
+
+- name: Copiar software tomcat
+  copy:
+    src: curso.zip
+    dest: /tmp/
+    owner: root
+    mode: '0440'
+
+- name: Descomprimir aplicacion
+  unarchive:
+    src: /tmp/curso.zip
+    dest: /opt/tomcat/webapps
+    remote_src: yes
+
+- name: Deploy
+  systemd:
+    state: stopped
+    name: tomcat
+    enabled: yes
+
+- name: Deploy .war
+  systemd:
+    state: started
+    name: tomcat
+    enabled: yes
+
+- name: Aplicando modificaciones
+  unarchive:
+    src: /tmp/curso.zip
+    dest: /opt/tomcat/webapps
+    remote_src: yes
+
+- name: Iniciando aplicacion
+  systemd:
+    state: stopped
+    name: tomcat
+    enabled: yes
+
+- name: Validando
+  systemd:
+    state: started
+    name: tomcat
+    enabled: yes

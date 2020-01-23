@@ -1,0 +1,5 @@
+- name: Instalar aplicacion curso
+  hosts: all
+  become: true
+  roles:
+    - role-curso
